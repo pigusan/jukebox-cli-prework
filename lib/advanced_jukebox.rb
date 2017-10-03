@@ -40,7 +40,6 @@ def run(songs)
   help
   puts "Please enter a command:"
   user_input = gets.chomp
-  until user_input == exit
     if user_input == 'help'
       help
     elsif user_input == 'list'
@@ -52,5 +51,4 @@ def run(songs)
     else
       run(songs)
     end
-  end
 end
