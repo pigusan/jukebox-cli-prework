@@ -1,5 +1,3 @@
-
-
 def help
   puts "I accept the following commands:"
   puts "- help : displays this help message"
@@ -24,7 +22,7 @@ def play(my_songs)
   user_input = gets.chomp
   if my_songs.keys.include?(user_input)
     puts "Now playing #{user_input}"
-    system 'open  ' << my_songs[user_input]
+    system 'open  #{my_songs[user_input]}'
   else
     puts "Invalid song choice"
     play(my_songs)
@@ -36,19 +34,29 @@ def exit_jukebox
   puts "Goodbye"
 end
 
-def run(songs)
+def run(my_songs)
   help
   puts "Please enter a command:"
   user_input = gets.chomp
-    if user_input == 'help'
-      help
-    elsif user_input == 'list'
-      list(songs)
-    elsif user_input == 'play'
-      play(songs)
-    elsif user_input == 'exit'
-      exit_jukebox
-    else
-      run(songs)
+  if user_input == "exit"
+    exit_jukebox
+  else
+    until user_input == 'exit' do
+      if user_input == 'help'
+        help
+        user_input = gets.chomp
+      elsif user_input == 'list'
+        list(my_songs)
+        user_input = gets.chomp
+      elsif user_input == 'play'
+        play(my_songs)
+        user_input = gets.chomp
+      else
+        puts "Incorrect command, please try again"
+        help
+        user_input = gets.chomp
+      end
     end
+    exit_jukebox
+  end
 end
